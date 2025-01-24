@@ -7,7 +7,6 @@ from tkinter import Tk, Button, Listbox, Label, messagebox, ttk
 import netifaces
 from concurrent.futures import ThreadPoolExecutor
 
-
 # Setting up logging
 logging.basicConfig(filename="atm_exploit.log", level=logging.DEBUG)
 
@@ -27,7 +26,7 @@ class ATMExploitTool:
         """Scan for ATMs on the network using Nmap."""
         print(f"Scanning network {network} for ATMs...")
         nmap_output_file = "nmap_results.txt"
-        
+       
         # Run Nmap and save results to a file
         os.system(f"nmap -p- -sV --open -oN {nmap_output_file} {network}")
         print("Scan complete. Parsing results...")
@@ -144,7 +143,7 @@ class ATMExploitGUI:
 
         atm_index = selection[0]
         atm = self.controller.atms[atm_index]
-        
+       
         self.controller.update_ui_progress(f"Exploiting ATM at {atm['ip']}...")
         if self.controller.exploit_atm(atm):
             messagebox.showinfo("Success", "ATM exploited successfully! Cash should dispense.")
@@ -161,4 +160,3 @@ if __name__ == "__main__":
     controller = ATMExploitTool()
     gui = ATMExploitGUI(controller)
     gui.run()
-
